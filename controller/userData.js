@@ -111,8 +111,9 @@ export const getUserData = async (req,res) =>{
 }
 
 export const getProfile = (req,res) =>{
+    const {token} = req.cookies
+    res.json({message:token})
     try {
-        const {token} = req.cookies
         jwt.verify(token,SECRET,(err,info)=>{
             if(err) throw err
             res.json(info)

@@ -124,6 +124,6 @@ export const getProfile = (req,res) =>{
 }
 
 export const logOut = (req,res) =>{
-    res.clearCookie('token')
+    res.clearCookie('token',{sameSite:'none',secure:true})
     res.status(200).json('Logged out successfully');
 }

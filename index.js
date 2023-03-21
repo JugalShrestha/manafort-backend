@@ -25,6 +25,10 @@ app.use(bodyParser.urlencoded({limit:'30mb',extended: true}))
 const CONNECTION_URL = process.env.ATLAS_URI
 const PORT = process.env.PORT
 
+app.get('/',(req,res)=>{
+    res.send("App is running!")
+})
+
 app.use('/register',registerRoutes)
 app.use('/emp',employeeRoutes)
 

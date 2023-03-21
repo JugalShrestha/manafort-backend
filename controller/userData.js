@@ -1,18 +1,19 @@
 import User from "../models/User.js";
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcryptjs'
+// import bcrypt from 'bcryptjs'
 
 import * as dotenv from 'dotenv'
 dotenv.config()
 
 
-const salt = bcrypt.genSaltSync(10)
+// const salt = bcrypt.genSaltSync(10)
 
 export const createUserData= async (req,res)=>{
     const {firstName,lastName,username,email,phone,age,address,id,pw} = req.body 
     try{
         const newUser = await User.create({
-            pw:bcrypt.hashSync(pw,salt),
+            // pw:bcrypt.hashSync(pw,salt),
+            pw,
             firstName,
             lastName,
             username,
@@ -49,9 +50,9 @@ export const getUserData = async (req,res) =>{
         //If username is entered
         if(userUsernameFound)
         {
-            const passwordOk = bcrypt.compareSync(pw,userUsernameFound.pw)
+            // const passwordOk = bcrypt.compareSync(pw,userUsernameFound.pw)
             
-            if(passwordOk)
+            if(pw==userUsernameFound.pw)
             {
                 passwordIsOk(userUsernameFound)
             }
@@ -62,9 +63,9 @@ export const getUserData = async (req,res) =>{
         //If phone is entered
         else if(userPhoneFound)
         {
-            const passwordOk = bcrypt.compareSync(pw,userPhoneFound.pw)
+            // const passwordOk = bcrypt.compareSync(pw,userPhoneFound.pw)
             
-            if(passwordOk)
+            if(pw==userPhoneFound.pw)
             {
                 passwordIsOk(userPhoneFound)
             }
@@ -75,9 +76,9 @@ export const getUserData = async (req,res) =>{
         //If email is entered
         else if(userEmailFound)
         {
-            const passwordOk = bcrypt.compareSync(pw,userEmailFound.pw)
+            // const passwordOk = bcrypt.compareSync(pw,userEmailFound.pw)
             
-            if(passwordOk)
+            if(pw==userEmailFound.pw)
             {
                 passwordIsOk(userEmailFound)
             }

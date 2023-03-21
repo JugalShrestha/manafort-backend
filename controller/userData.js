@@ -119,7 +119,7 @@ export const getProfile = (req,res) =>{
             res.json(info)
         })
     } catch (error) {
-        res.status(400).json({status:"error"}) 
+        res.status(400).json({status:"error:"+error.message}) 
     }
 }
 

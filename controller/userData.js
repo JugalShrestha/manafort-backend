@@ -112,13 +112,14 @@ export const getUserData = async (req,res) =>{
 
 export const getProfile = (req,res) =>{
     const {token} = req.cookies
-    res.json({message:token})
     try {
         jwt.verify(token,SECRET,(err,info)=>{
             if(err) {
-                res.status(400).json({message:err.message})
+                res.status(400).json({error:err.message})
             }
-            res.status(200).json(info)
+            else{
+                res.status(200).json(info)
+            }
         })
     } catch (error) {
         res.status(400).json({status:"error:"+error.message}) 

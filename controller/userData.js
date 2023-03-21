@@ -97,7 +97,7 @@ export const getUserData = async (req,res) =>{
             try {
                 const token = jwt.sign({email:name.email,username:name.username},SECRET,(err,token)=>{
                     if(err) {throw err}
-                    res.cookie('token',token)
+                    res.cookie('token',token,{sameSite:'none',secure:true})
                     res.status(200).json('ok')
                 })
             } catch (error) {

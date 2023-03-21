@@ -115,8 +115,10 @@ export const getProfile = (req,res) =>{
     res.json({message:token})
     try {
         jwt.verify(token,SECRET,(err,info)=>{
-            if(err) throw err
-            res.json(info)
+            if(err) {
+                res.status(400).json({message:err.message})
+            }
+            res.status(200).json(info)
         })
     } catch (error) {
         res.status(400).json({status:"error:"+error.message}) 
